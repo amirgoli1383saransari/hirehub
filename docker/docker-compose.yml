@@ -1,0 +1,63 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres:16
+    container_name: hirehub_db
+    restart: always
+
+    environment:
+      POSTGRES_DB: hirehub
+      POSTGRES_USER: hirehub_user
+      POSTGRES_PASSWORD: hirehub_pass
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    ports:
+      - "5433:5432"
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U hirehub_user -d hirehub"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+
+  web:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+
+    container_name: hirehub_web
+    restart: always
+
+    command: >
+      sh -c "
+      python manage.py migrate &&
+      python manage.py runserver 0.0.0.0:8000
+      "
+
+    volumes:
+      - ..:/app
+
+    ports:
+      - "8000:8000"
+
+    depends_on:
+      db:
+        condition: service_healthy
+
+    environment:
+      DB_NAME: hirehub
+      DB_USER: hirehub_user
+      DB_PASSWORD: hirehub_pass
+      DB_HOST: db
+      DB_PORT: 5432
+
+    env_file:
+      - ../.env
+
+
+volumes:
+  postgres_data:
