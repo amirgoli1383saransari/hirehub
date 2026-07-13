@@ -10,11 +10,23 @@ from drf_spectacular.views import (
     SpectacularRedocView,
 )
 
-from rest_framework_simplejwt.views import (
-    TokenRefreshView,
-)
+from django.http import JsonResponse
+
+def api_root(request):
+    return JsonResponse(
+        {
+            "project": "HireHub API",
+            "version": "1.0.0",
+            "status": "running",
+            "documentation": "/api/docs/",
+            "redoc": "/api/redoc/",
+            "schema": "/api/schema/",
+        }
+    )
 
 urlpatterns = [
+    path("", api_root),
+
     path("admin/", admin.site.urls),
 
     path("api/accounts/", include("apps.accounts.api.urls")),
@@ -54,7 +66,6 @@ urlpatterns = [
         name="redoc",
     ),
 
-    path("api/auth/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
 
     path("api/dashboard/", include("apps.dashboard.api.urls")),
 
