@@ -1,208 +1,377 @@
-# HireHub
+# HireHub 🚀
 
-A modern Job Board & Recruitment Platform built with Django REST Framework.
+A modern Job Board & Recruitment Platform Backend built with Django REST Framework.
 
-HireHub is a backend-focused recruitment system where employers can publish jobs and applicants can build resumes, apply for positions, bookmark jobs, receive notifications, and manage their recruitment process through dashboards.
+HireHub is a backend-focused recruitment system where employers can publish job opportunities and applicants can create resumes, apply for jobs, bookmark jobs, receive notifications, and manage their recruitment process through dashboards.
+
+The project is built with real-world backend development practices including JWT authentication, role-based permissions, PostgreSQL database, API documentation, and production deployment.
 
 ---
 
-# Features
+# 🌐 Live Demo
 
-### Authentication
+API Base URL:
+
+```
+https://hirehub-api-3xms.onrender.com
+```
+
+Swagger Documentation:
+
+```
+https://hirehub-api-3xms.onrender.com/api/docs/
+```
+
+ReDoc:
+
+```
+https://hirehub-api-3xms.onrender.com/api/redoc/
+```
+
+OpenAPI Schema:
+
+```
+https://hirehub-api-3xms.onrender.com/api/schema/
+```
+
+---
+
+# ✨ Features
+
+## Authentication
 
 - JWT Authentication
-- Login / Register
+- Register / Login
 - Refresh Token
+- Custom User Model
 - Role-based permissions
-- Applicant & Employer accounts
+
+Supported roles:
+
+- Applicant
+- Employer
+
 
 ---
 
-### Resume Management
+# Resume Management
 
-- Create Resume
-- Update Resume
-- Delete Resume
-- Resume ownership validation
+Applicants can manage their professional profile:
+
+- Create and update resume
+- Manage skills
+- Manage experiences
+- Manage education
+- Set employment status
+- Set years of experience
+- Set expected salary
+
+Resume ownership validation is implemented to protect user data.
 
 ---
 
-### Job Management
+# Job Management
 
-- Create Job
-- Edit Job
-- Delete Job
-- Activate / Deactivate Job
+Employers can:
+
+- Create jobs
+- Update jobs
+- Delete jobs
+- Activate / deactivate jobs
+- Manage their own job listings
+
+
+Features:
+
 - Employer ownership validation
+- Job filtering
+- Searching
+- Ordering
+
+
+Supported filters:
+
+- Job Type
+- Experience Level
+- Salary Range
+
+
+Ordering:
+
+- Created date
+- Salary
+- Title
+
 
 ---
 
-### Job Search
+# Applications
 
-- Full-text Search
-- Filter by:
+Applicants can:
 
-  - Job Type
-  - Experience Level
-  - Salary Range
+- Apply for jobs
+- Track application status
 
-- Ordering by:
 
-  - Date
-  - Salary
-  - Title
+Employers can:
+
+- View received applications
+- Review applicants
+- Change application status
+
+
+Application workflow:
+
+```
+Applied
+    |
+Under Review
+    |
+Interview
+    |
+Accepted / Rejected
+```
+
+
+Validation features:
+
+- Prevent duplicate applications
+- Prevent applying for own job
+- Validate resume ownership
+
 
 ---
 
-### Applications
+# Notifications
 
-Applicants can
+Automatic notifications are created for:
 
-- Apply for Jobs
-- Track Application Status
-
-Employers can
-
-- View Applicants
-- Review Applications
-- Accept Applicants
-- Reject Applicants
-- Schedule Interviews
-
----
-
-### Notifications
-
-Automatic notifications when
-
-- Someone applies for your job
+- New job applications
 - Application status changes
 
-Features
 
-- List Notifications
-- Mark One as Read
-- Mark All as Read
+Features:
 
----
+- List notifications
+- Read notifications
+- Manage notification status
 
-### Bookmarks
-
-Applicants can
-
-- Save Jobs
-- View Saved Jobs
-- Remove Saved Jobs
 
 ---
 
-### Dashboard
+# Bookmarks
 
-Applicant Dashboard
+Applicants can:
 
-- Total Applications
-- Under Review
-- Accepted
-- Rejected
-- Recent Applications
+- Save favorite jobs
+- View saved jobs
+- Remove bookmarks
 
-Employer Dashboard
 
-- Total Jobs
-- Active Jobs
-- Closed Jobs
-- Total Applications
-- Recent Jobs
-- Recent Applicants
+Features:
+
+- Prevent duplicate bookmarks
+- User-specific bookmarks
+
 
 ---
 
-# Tech Stack
+# Dashboard
+
+## Applicant Dashboard
+
+Includes:
+
+- Total applications
+- Application status statistics
+- Recent applications
+
+
+## Employer Dashboard
+
+Includes:
+
+- Total jobs
+- Active jobs
+- Closed jobs
+- Total applications
+- Recent jobs
+- Recent applicants
+
+
+---
+
+# 🛠 Tech Stack
+
+## Backend
 
 - Python 3.12
-- Django 5
+- Django 5.2
 - Django REST Framework
+
+
+## Database
+
 - PostgreSQL
+
+
+## Authentication
+
+- Simple JWT
+
+
+## API Documentation
+
+- drf-spectacular
+- Swagger UI
+
+
+## Deployment
+
+- Render
+- Gunicorn
+- WhiteNoise
+
+
+## Development Tools
+
 - Docker
 - Docker Compose
-- JWT Authentication
-- drf-spectacular (Swagger)
-- django-filter
+- Git
+- Linux
+
 
 ---
 
-# Project Structure
+# 📂 Project Structure
 
 ```
 HireHub/
 
-apps/
-    accounts/
-    jobs/
-    resumes/
-    applications/
-    bookmarks/
-    notifications/
-    dashboard/
-
-config/
-
-docker/
-
-requirements.txt
+├── apps/
+│
+├── accounts/
+├── jobs/
+├── resumes/
+├── applications/
+├── bookmarks/
+├── notifications/
+├── dashboard/
+│
+├── config/
+│
+├── docker/
+│
+├── manage.py
+├── requirements.txt
+└── README.md
 ```
 
 ---
 
-# API Documentation
+# ⚙️ Installation
 
-Swagger
+## Clone Repository
 
-```
-http://localhost:8000/api/docs/
-```
-
-ReDoc
-
-```
-http://localhost:8000/api/redoc/
+```bash
+git clone https://github.com/amirgoli1383saransari/hirehub.git
 ```
 
-OpenAPI Schema
+Go to project:
 
-```
-http://localhost:8000/api/schema/
+```bash
+cd hirehub
 ```
 
 ---
 
-# Running with Docker
-
-Clone repository
+## Create Virtual Environment
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/HireHub.git
+python -m venv .venv
 ```
 
-Go inside project
+Activate:
+
+Linux:
 
 ```bash
-cd HireHub/docker
+source .venv/bin/activate
 ```
 
-Build
+---
+
+## Install Dependencies
+
+```bash
+pip install -r requirements.txt
+```
+
+---
+
+## Environment Variables
+
+Create `.env` file:
+
+```env
+DEBUG=True
+
+SECRET_KEY=your-secret-key
+
+POSTGRES_DB=database_name
+POSTGRES_USER=database_user
+POSTGRES_PASSWORD=password
+POSTGRES_HOST=localhost
+POSTGRES_PORT=5432
+```
+
+---
+
+## Run Database Migrations
+
+```bash
+python manage.py migrate
+```
+
+---
+
+## Create Superuser
+
+```bash
+python manage.py createsuperuser
+```
+
+---
+
+## Run Development Server
+
+```bash
+python manage.py runserver
+```
+
+---
+
+# 🐳 Docker Development
+
+Docker is used for development environment setup.
+
+Run:
+
+```bash
+cd docker
+```
 
 ```bash
 docker compose up --build
 ```
 
-Run migrations
+Run migrations:
 
 ```bash
 docker compose exec web python manage.py migrate
 ```
 
-Create Superuser
+Create superuser:
 
 ```bash
 docker compose exec web python manage.py createsuperuser
@@ -210,107 +379,185 @@ docker compose exec web python manage.py createsuperuser
 
 ---
 
-# Running Locally
+# 🔐 Authentication
 
-Create virtual environment
+After login, add JWT token to requests:
 
-```bash
-python -m venv .venv
 ```
-
-Activate
-
-Linux
-
-```bash
-source .venv/bin/activate
-```
-
-Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-Run
-
-```bash
-python manage.py migrate
-python manage.py runserver
+Authorization: Bearer <access_token>
 ```
 
 ---
 
-# Main Endpoints
+# 📌 Main API Endpoints
 
-Authentication
+
+## Authentication
 
 ```
 POST /api/accounts/register/
-POST /api/accounts/login/
+
+POST /api/token/
+
 POST /api/token/refresh/
 ```
 
-Jobs
+
+---
+
+## Jobs
 
 ```
-GET /api/jobs/
-POST /api/jobs/
-GET /api/jobs/{id}/
-PATCH /api/jobs/{id}/
+GET    /api/jobs/
+
+POST   /api/jobs/
+
+GET    /api/jobs/{id}/
+
+PATCH  /api/jobs/{id}/
+
 DELETE /api/jobs/{id}/
 ```
 
-Applications
+
+---
+
+## Resume
 
 ```
-GET /api/applications/
-POST /api/applications/
+GET    /api/resume/me/
+
+PATCH  /api/resume/me/
+
+GET    /api/resume/skills/
+
+POST   /api/resume/skills/
+```
+
+
+---
+
+## Applications
+
+```
+GET   /api/applications/
+
+POST  /api/applications/
+
+GET   /api/applications/jobs/{job_id}/applications/
+
 PATCH /api/applications/{id}/status/
 ```
 
-Bookmarks
+
+---
+
+## Bookmarks
 
 ```
-GET /api/bookmarks/
-POST /api/bookmarks/
+GET    /api/bookmarks/
+
+POST   /api/bookmarks/
+
 DELETE /api/bookmarks/{id}/
 ```
 
-Notifications
+
+---
+
+## Notifications
 
 ```
-GET /api/notifications/
-PATCH /api/notifications/{id}/read/
-POST /api/notifications/read-all/
+GET    /api/notifications/
+
+PATCH  /api/notifications/{id}/read/
+
+POST   /api/notifications/read-all/
 ```
 
-Dashboard
+
+---
+
+## Dashboard
 
 ```
 GET /api/dashboard/applicant/
+
 GET /api/dashboard/employer/
 ```
 
 ---
 
-# Future Improvements
+# 🚀 Deployment
 
-- Email Notifications
-- Celery + Redis
-- Real-time Notifications (WebSocket)
-- Company Profiles
-- Advanced Resume Builder
-- Job Recommendation Engine
-- Unit Tests
-- CI/CD Pipeline
-- Deployment
+The project is deployed on Render.
+
+Deployment stack:
+
+- Render Web Service
+- Render PostgreSQL
+- Gunicorn WSGI Server
+- WhiteNoise Static Files
+
+
+Deployment workflow:
+
+```
+GitHub Push
+      |
+      |
+Render Build
+      |
+      |
+Install Dependencies
+      |
+      |
+Collect Static Files
+      |
+      |
+Run Migrations
+      |
+      |
+Gunicorn Server
+```
 
 ---
 
-# Version
+# 🔮 Future Improvements
 
-Current Release
+- Email Notifications
+- Celery + Redis Background Tasks
+- Real-time Notifications with WebSocket
+- Company Profile Pages
+- Advanced Resume Builder
+- Job Recommendation System
+- Automated Testing
+- CI/CD Pipeline
+
+
+---
+
+# 👨‍💻 Author
+
+**Amir Mahdi Gol Mohammadi**
+
+Backend Developer
+
+
+Skills:
+
+- Python
+- Django
+- Django REST Framework
+- PostgreSQL
+- Docker
+- Redis
+- Clean Architecture
+
+
+---
+
+# 📦 Version
 
 ```
 v1.0.0
@@ -318,6 +565,6 @@ v1.0.0
 
 ---
 
-# License
+# 📄 License
 
 MIT License
