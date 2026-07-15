@@ -4,7 +4,7 @@ from django.db import models
 
 class User(AbstractUser):
     class Role(models.TextChoices):
-        HR = "hr", "HR"
+        EMPLOYER = "employer", "Employer"
         APPLICANT = "applicant", "Applicant"
 
     email = models.EmailField(unique=True)

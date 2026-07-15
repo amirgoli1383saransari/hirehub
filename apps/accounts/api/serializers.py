@@ -20,12 +20,12 @@ class RegisterSerializer(serializers.ModelSerializer):
             "email",
             "username",
             "password",
+            "role",
         )
         read_only_fields = ("id",)
 
     def create(self, validated_data):
         return User.objects.create_user(**validated_data)
-
 
 class LoginSerializer(serializers.Serializer):
     email = serializers.EmailField(
@@ -58,6 +58,7 @@ class LoginSerializer(serializers.Serializer):
                 "id": user.id,
                 "email": user.email,
                 "username": user.username,
+                "role": user.role,
             },
             "refresh": str(refresh),
             "access": str(refresh.access_token),

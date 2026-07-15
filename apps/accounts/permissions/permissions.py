@@ -1,27 +1,20 @@
 from rest_framework.permissions import BasePermission
-
+from apps.accounts.models import User
 
 class IsEmployer(BasePermission):
-    """
-    Allows access only to employers.
-    """
 
     def has_permission(self, request, view):
         return (
             request.user.is_authenticated
-            and request.user.role == "employer"
+            and request.user.role == User.Role.EMPLOYER
         )
 
-
 class IsApplicant(BasePermission):
-    """
-    Allows access only to applicants.
-    """
 
     def has_permission(self, request, view):
         return (
             request.user.is_authenticated
-            and request.user.role == "applicant"
+            and request.user.role == User.Role.APPLICANT
         )
 
 
